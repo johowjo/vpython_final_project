@@ -1,8 +1,15 @@
+# Author: B12901022/B12901035
 from vpython import *
 import math
 
+# alpha particle
 r1, m1, q1 = 0.4, 4, 2
-r2, m2, q2 = 1, 197, 79
+# aurum nucleus
+q2 = 79
+
+# other related parameters
+# let culoumb's constant be 1
+
 v0 = vec(10, 0, 0)
 D, k = 20, 1
 b = 0.04
@@ -12,8 +19,8 @@ b_range = 20
 num = 500
 
 
-def calc_angle(r, i):
-    t = math.atan2(r.y - i * b_range / num, r.x)
+def calc_angle(v):
+    t = math.atan2(v.y, v.x)
     return t
 
 
@@ -30,7 +37,7 @@ for i in range(-num, num):
     particles.append(sph)
     # y0.append(sph.pos.y)
 
-nucleus = sphere(pos=vec(0, 0, 0), radius=r2, color=color.yellow)
+nucleus = sphere(pos=vec(0, 0, 0), radius=1, color=color.yellow)
 
 while t < 4:
     for par in particles:
@@ -46,9 +53,9 @@ angles = []
 
 for i in range(-num, num):
     par = particles[num + i]
-    r = par.pos
+    v = par.v
     # r.y -= i * b_range / num
-    angles.append(calc_angle(r, i))
+    angles.append(calc_angle(v))
 
 
 # print(len(particles))
@@ -62,13 +69,11 @@ angles.sort()
 scene = graph()
 graph = gcurve(color=color.blue, graph=scene)
 
-
 p = 0
+
+
 for ang in angles:
     p += 1 / len(particles)
     graph.plot(pos=(ang, p))
-
-#
-#
-#
-#
+    if abs(p - 0.5) < 0.01:
+        print(ang)
