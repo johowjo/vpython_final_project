@@ -61,7 +61,14 @@ angles.sort()
 #     print(angles[i])
 # print(angles[999])
 
+scene = graph()
+graph = gcurve(color = color.blue, graph = scene)
 
+
+p = 0
+for ang in angles:
+    p += 1 / len(particles)
+    graph.plot(pos = (ang, p))
 
 #
 #
