@@ -3,7 +3,7 @@ from vpython import *
 import math
 
 # alpha particle
-r1, m1, q1 = 0.4, 4, 2
+m1, q1 = 4, 2
 # aurum nucleus
 q2 = 79
 
@@ -16,6 +16,7 @@ b = 0.04
 t, dt = 0, 0.001
 b_range = 20
 
+# number of samples
 num = 500
 
 
@@ -29,7 +30,7 @@ particles = []
 for i in range(-num, num):
     sph = sphere(
         pos=vec(-D, i * b_range / num, 0),
-        radius=r1,
+        radius=0.4,
         v=v0,
         color=color.red,
         make_trail=True,
@@ -71,9 +72,8 @@ graph = gcurve(color=color.blue, graph=scene)
 
 p = 0
 
-
 for ang in angles:
     p += 1 / len(particles)
     graph.plot(pos=(ang, p))
-    if abs(p - 0.5) < 0.01:
-        print(ang)
+    # if abs(p - 0.5) < 0.01:
+    #     print(ang)
